@@ -1,0 +1,2 @@
+# CecMan
+CecMan competition
