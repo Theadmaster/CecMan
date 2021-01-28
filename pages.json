@@ -1,21 +1,32 @@
 {
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path" : "pages/login/login",
+		    "style" :{
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+		    }
+		    
+		},
+		{
+			"path" : "pages/main/main",
+			"style" : {
+				"enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+			}
+			
+		}
+		,{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
 		}
 	    ,{
-            "path" : "pages/main/main",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
             "path" : "pages/list/list",
             "style" :                                                                                    
             {
@@ -51,11 +62,37 @@
             }
             
         }
+        
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#000",
+		"selectedColor": "#1196DB",
+		"backgroundColor": "rgb(250, 250, 250)",
+		"list": [{
+				"pagePath": "pages/main/main",
+				"iconPath": "static/img/main.png",
+				"selectedIconPath": "static/img/main_selected.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/profile/profile",
+				"iconPath": "static/img/user.png",
+				"selectedIconPath": "static/img/user_selected.png",
+				"text": "我的"
+			}
+		],
+		"midButton": {
+			"iconPath": "static/img/photo.png",
+			"text": "识别随货同行单",
+			"height": "70px",
+			"iconWidth": "44px",
+			"backgroundImage":"#fff"
+		}
 	}
 }
