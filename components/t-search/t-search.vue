@@ -43,7 +43,7 @@
 	display: flex;
 	align-items: center;
 	padding: 0 27.38rpx;
-	box-shadow: 0 0 18rpx -7.47rpx rgba($color: #000000, $alpha: 0.5);
+	box-shadow: 0 0 18rpx -7.47rpx rgba($color: #000000, $alpha: 0.2);
 	.search-left {
 		width: 60.74rpx;
 		display: flex;
