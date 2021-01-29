@@ -10,7 +10,7 @@
 		</u-navbar>
 		
 		<view class="search-wrap">
-			<t-search background="#fff" />
+			<t-search background="#fff" @scan="scanClick" />
 		</view>
 		
 		
@@ -35,7 +35,7 @@
 					</view>
 				</view>
 				<view class="list-item" v-for="(item, index) in ele.list" :key="index" v-if="ele.isFold" >
-					<t-item :info="item" @check="checkClick($event,i)" @itemClick="itemClick"></t-item>
+					<t-item :info="item" @check="checkClick($event,i)" @select="sheetClick" @itemClick="itemClick"></t-item>
 				</view>
 			</view>
 		</view>
@@ -172,14 +172,49 @@
 			};
 		},
 		methods: {
-			photoClick() {
-				console.log('paizhao')
+			// 文字扫描
+			scanClick(){
+				uni.chooseImage({
+				    count: 6, //默认9
+				    sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+				    sourceType: ['album', 'camera'], //从相册选择
+				    success: function (res) {
+				        console.log(JSON.stringify(res.tempFilePaths));
+				    },
+					fail: err => {
+						console.log(err)
+					}
+				});
 			},
+			// 同行单扫描
+			photoClick() {
+				uni.chooseImage({
+				    count: 6, //默认9
+				    sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+				    sourceType: ['album', 'camera'], //从相册选择
+				    success: function (res) {
+				        console.log(JSON.stringify(res.tempFilePaths));
+				    },
+					fail: err => {
+						console.log(err)
+					}
+				});
+			},
+			// 查看单项供应商的扫描结果
 			itemClick(i) {
 				console.log(i)
+				uni.navigateTo({
+					url: '../result/result'
+				})
 			},
+			// 检测按钮
 			inspectClick(){
 				console.log('检测')
+			},
+			//单项供应商操作
+			sheetClick(i) {
+				console.log(i)
+				//1置顶 2反馈问题 3删除
 			},
 			selectDotClick(i) {
 				this.list[i].checked = !this.list[i].checked

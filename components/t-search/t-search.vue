@@ -24,11 +24,7 @@
 		},
 		methods: {
 			scanClick(){
-				uni.scanCode({
-					success: res => {
-						console.log(res)
-					}
-				})
+				this.$emit('scan')
 			}
 		}
 	}

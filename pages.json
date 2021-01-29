@@ -37,10 +37,10 @@
         }
         ,{
             "path" : "pages/inspection/inspection",
-            "style" :                                                                                    
-            {
+            "style" : {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
             }
             
         }
@@ -63,15 +63,6 @@
             
         }
         
-        ,{
-            "path" : "pages/result/result",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -80,7 +71,6 @@
 		"backgroundColor": "#F8F8F8"
 	},
 	"tabBar": {
-		"borderStyle": "white",
 		"color": "#000",
 		"selectedColor": "#1196DB",
 		"backgroundColor": "#fff",

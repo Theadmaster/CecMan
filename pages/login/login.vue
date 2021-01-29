@@ -29,7 +29,7 @@
 			</view>
 		</view>
 		
-		<view class="btn" @click="login">
+		<view class="btn" :class="btnActive? 'btn-active': ''" @click="login">
 			<text>登录</text>
 		</view>
 		
@@ -59,11 +59,24 @@
 				active: 0,
 				blur1: false,
 				blur2: false,
+				btnActive: false,
 				form: {
 					username: '',
 					password: ''
 				}
 			};
+		},
+		watch: {
+			form: {
+				handler: function(val, oldVal) {
+					if(val.username && val.password) {
+						this.btnActive = true
+					} else {
+						this.btnActive = false
+					}
+				},
+				deep: true
+			}
 		},
 		methods: {
 			login() {
@@ -146,6 +159,10 @@
 	color: #fff;
 	font-size: 46.72rpx;
 	border-radius: 18.69rpx;
+}
+
+.btn-active {
+	background-color: #1196DB;
 }
 
 .forget {

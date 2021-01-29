@@ -6,7 +6,7 @@
 					<view class="dot-content" />
 				</view>
 			</view>
-			<view class="item-center" @click="$emit('itemClick', info.id)">
+			<view class="item-center" @click="itemClick">
 				<text class="center-top">{{info.name}}</text>
 				<text class="center-bottom">{{info.time}}</text>
 			</view>
@@ -47,6 +47,13 @@
 			},
 			selectClick(i) {
 				this.$emit('select', i)
+			},
+			itemClick() {
+				if(this.moreActive) {
+					this.moreActive = false
+				} else {
+					this.$emit('itemClick', this.info.id)
+				}
 			}
 		}
 	}
@@ -137,6 +144,8 @@
 				background-color: #48dbfb;
 			}
 			.item2 {
+				box-sizing: border-box;
+				padding-left: 15rpx;
 				background-color: #3498db;
 			}
 			.item3 {

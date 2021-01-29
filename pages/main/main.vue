@@ -214,7 +214,7 @@
 	justify-content: space-between;
 	max-width: 100vw;
 	.module-left {
-		width: 295.79rpx;
+		width: 48%;
 		border-radius: 14.01rpx;
 		background-color: #fff;
 		box-shadow: 0 0 23.36rpx -7.47rpx rgba($color: #000000, $alpha: .2);
@@ -245,7 +245,7 @@
 	}
 	
 	.module-right {
-		width: 295.79rpx;
+		width: 48%;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
