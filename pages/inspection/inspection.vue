@@ -36,36 +36,62 @@
 		</view>
 		
 		<view class="list">
-			<view class="item" v-for="(item, index) in list" :key="index">
-				<view class="item-left" >
-					<view class="name" >
-						<text :class="item.status>1? 'err': ''">{{item.name}}</text>
-						<view class="tag">
-							<text>{{item.status==2? '潮湿': (item.status == 3? '破损' : '信息不全')}}</text>
+			<view class="item-wrap">
+				<view class="item" v-for="(item, index) in list" :key="index" @click="itemClick(index)">
+					<view class="item-left" >
+						<view class="name" >
+							<text :class="item.status>1&&item.over? 'err': ''">{{item.name}}</text>
+							<view class="tag" v-if="item.status>1 && item.over">
+								<text>{{item.status==2? '潮湿': (item.status == 3? '破损' : (item.status == 4? '信息不全' : ''))}}</text>
+							</view>
+						</view>
+						<text :class="item.status>1&&item.over? 'err': ''">产品批号：{{item.num}}</text>
+					</view>
+					<view class="item-right" v-if="status!=3" >
+						<image v-if="item.status==1" src="../../static/img/fa-check.svg" mode=""></image>
+						<image v-if="item.status==0" src="../../static/img/fa-history.svg" mode=""></image>
+						<image v-if="item.status>1" src="../../static/img/fa-times.svg" mode=""></image>
+					</view>
+					
+					<view class="item-right1" v-else>
+						<view class="dot" :class="item.checked? 'active' : ''" @click.stop="dotClick(index)">
+							<view class="dot-content" />
 						</view>
 					</view>
-					<text :class="item.status>1? 'err': ''">产品批号：{{item.num}}</text>
-				</view>
-				<view class="item-right">
-					<image v-if="item.status==1" src="../../static/img/fa-check.svg" mode=""></image>
-					<image v-if="item.status==0" src="../../static/img/fa-history.svg" mode=""></image>
-					<image v-if="item.status>1" src="../../static/img/fa-times.svg" mode=""></image>
 				</view>
 			</view>
 			
 			<view class="title">
-				<text>{{num}}</text>
+				<text>{{count}}/{{list.length}}</text>
 			</view>
 			
-			<view class="btn" v-if="status===1">
+			<view class="btn" v-if="status===1" @click="btnClick(1)">
 				<text>停止</text>
 			</view>
-			<view class="btn btn1" v-if="status===0">
+			<view class="btn btn1" v-if="status===0" @click="btnClick(0)">
 				<text>开始</text>
 			</view>
 			
-			<view class="btn btn2" v-if="status===2">
+			<view class="btn btn2" v-if="status===2" @click="btnClick(2)">
 				<text>查看检测结果</text>
+			</view>
+			
+			<view class="btn3" v-if="status===3">
+				<view class="btn-left">
+					<view class="dot" :class="active? 'active' : ''" @click="allCheck">
+						<view class="dot-content" />
+					</view>
+					<text>全选</text>
+				</view>
+				
+				<view class="btn-right">
+					<view class="item right1" @click="operate(1)">
+						<text>一键入库</text>
+					</view>
+					<view class="item right2" @click="operate(2)">
+						<text>问题产品登记</text>
+					</view>
+				</view>
 			</view>
 		</view>
 		
@@ -76,8 +102,14 @@
 	export default {
 		data() {
 			return {
-				status: 2,
-				num: '12/20',
+				// 0 未开始检查
+				// 1 正在检查
+				// 2 检查完毕
+				// 3 登记状态
+				status: 0,
+				active: false,
+				interval: null,
+				count: 0,
 				// 0 未检查（等待检查）
 				// 1 检查通过 没毛病
 				// 2 检查不通过 潮湿
@@ -88,35 +120,78 @@
 						id: 0,
 						name: '结扎装置',
 						num: '10023043',
-						status: '1'
+						status: '0',
+						over: false,
+						checked: false
 					}, {
 						id: 1,
 						name: '结扎装置',
 						num: '10023043',
-						status: '2'
+						status: '0',
+						over: false,
+						checked: false
 					}, {
 						id: 2,
 						name: '结扎装置',
 						num: '10023043',
-						status: '1'
+						status: '0',
+						over: false,
+						checked: false
 					}, {
 						id: 3,
 						name: '结扎装置',
 						num: '10023043',
-						status: '3'
+						status: '0',
+						over: false,
+						checked: false
 					}, {
 						id: 4,
 						name: '结扎装置',
 						num: '10023043',
-						status: '4'
+						status: '0',
+						over: false,
+						checked: false
 					}, {
 						id: 5,
 						name: '结扎装置',
 						num: '10023043',
-						status: '0'
+						status: '0',
+						over: false,
+						checked: false
+					}, {
+						id: 6,
+						name: '结扎装置',
+						num: '10023043',
+						status: '0',
+						over: false,
+						checked: false
+					}, {
+						id: 7,
+						name: '结扎装置',
+						num: '10023043',
+						status: '0',
+						over: false,
+						checked: false
+					}, {
+						id: 8,
+						name: '结扎装置',
+						num: '10023043',
+						status: '0',
+						over: false,
+						checked: false
+					}, {
+						id: 9,
+						name: '结扎装置',
+						num: '10023043',
+						status: '0',
+						over: false,
+						checked: false
 					}
 				]
 			};
+		},
+		watch:{
+
 		},
 		methods: {
 			moreClick() {
@@ -124,6 +199,68 @@
 				uni.navigateTo({
 					url: '../list/list'
 				})
+			},
+			allCheck() {
+				this.active = !this.active
+				if(this.active) {
+					this.list.forEach((item, index, arr) => {
+						arr[index].checked = true
+					})
+				} else {
+					this.list.forEach((item, index, arr) => {
+						arr[index].checked = false
+					})
+				}
+			},
+			dotClick(i) {
+				console.log(i)
+				this.list[i].checked = !this.list[i].checked
+				this.active = this.list.filter(item => !item.checked).length==0? true : false
+			},
+			operate(i) {
+				if(i===1) {
+					console.log('一键入库')
+				}else {
+					console.log('问题产品登记')
+				}
+			},
+			itemClick(i) {
+				uni.navigateTo({
+					url: `../detail/detail?id=${i}`
+				})
+			},
+			btnClick(i) {
+				switch(i) {
+					case 0:
+					//未开始检查状态
+					this.status = 1
+					
+					//模拟检测
+					this.interval = setInterval(() => {
+						if(this.interval) {
+							if(this.count>this.list.length-1) {
+								clearInterval()
+								this.interval = null
+								this.status = 2
+							}
+							this.list[this.count].over = true
+							this.list[this.count].status = (Math.floor(Math.random()*3)+1).toString()
+							this.count++
+						}
+					}, 1000)
+					
+					break;
+					case 1:
+					//正在检查状态
+					this.status = 0
+					clearInterval()
+					this.interval = null
+					break;
+					case 2: 
+					//检查完毕状态
+					this.status = 3
+					break;
+				}
 			}
 		}
 	}
@@ -225,7 +362,7 @@
 .list {
 	border-radius: 46.72rpx 46.72rpx 0px 0px;
 	background-color: #fff;
-	// height: 723.36rpx;
+	
 	width: 100vw;
 	box-shadow: 0 0 23.36rpx -7.47rpx rgba($color: #000000, $alpha: .2);
 	// border: 0.46rpx solid #000;
@@ -233,53 +370,82 @@
 	top: -126.72rpx;
 	box-sizing: border-box;
 	padding: 42.05rpx 46.26rpx;
-	.item {
-		height: 93.45rpx;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		border-bottom: 0.46rpx solid #eee;
-		
-		.item-left {
-			width: 336.91rpx;
-			height: 74.11rpx;
+	.item-wrap {
+		height: 623.36rpx;
+		overflow: scroll;
+		.item {
+			height: 93.45rpx;
 			display: flex;
-			flex-direction: column;
+			align-items: center;
 			justify-content: space-between;
-			text {
-				font-size: 16.82rpx;
-				color: #767676;
-			}
+			border-bottom: 0.46rpx solid #eee;
 			
-			.name {
+			.item-left {
+				width: 336.91rpx;
+				height: 74.11rpx;
 				display: flex;
-				align-items: center;
-				> text {
-					font-size: 32.71rpx;
-					color: #101010;
-					margin-right: 20rpx;
+				flex-direction: column;
+				justify-content: space-between;
+				text {
+					font-size: 16.82rpx;
+					color: #767676;
 				}
 				
-				.tag {
-					padding: 0 10rpx;
-					height: 30.65rpx;
-					// width: 56.07rpx;
+				.name {
+					display: flex;
+					align-items: center;
+					> text {
+						font-size: 32.71rpx;
+						color: #101010;
+						margin-right: 20rpx;
+					}
+					
+					.tag {
+						padding: 0 10rpx;
+						height: 30.65rpx;
+						// width: 56.07rpx;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						text {
+							color: #fff;
+							font-size: 20.03rpx;
+						}
+						background-color: red;
+						border-radius: 37.38rpx;
+					}
+				}
+			}
+			.item-right {
+				image {
+					height: 30.84rpx;
+					width: 30.84rpx;
+				}
+			}
+			
+			.item-right1 {
+				width: 40rpx;
+				// height: 100%;
+				.dot {
+					height: 32.24rpx;
+					width: 32.24rpx;
+					border: 0.46rpx solid #ccc;
+					border-radius: 50%;
+				}
+				.active {
+					// background-color: #0076FF;
+					border: 0.46rpx solid #0076FF;
+					padding: 5rpx;
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					text {
-						color: #fff;
-						font-size: 20.03rpx;
+					.dot-content {
+						height: 100%;
+						width: 100%;
+						background-color: #0076FF;
+						border-radius: 50%;
 					}
-					background-color: red;
-					border-radius: 37.38rpx;
 				}
-			}
-		}
-		.item-right {
-			image {
-				height: 30.84rpx;
-				width: 30.84rpx;
 			}
 		}
 	}
@@ -317,6 +483,75 @@
 		color: #fff;
 		text {
 			letter-spacing: 4.33rpx;
+		}
+	}
+	
+	.btn3 {
+		background-color: #FFFFFF;
+		height: 97.66rpx;
+		position: fixed;
+		z-index: 20;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		box-shadow: 0 -3rpx 23.36rpx -7.47rpx rgba($color: #000000, $alpha: .2);
+		display: flex;
+		align-items: center;
+		.btn-left {
+			height: 100%;
+			width: 100rpx;
+			// background-color: #007AFF;
+			display: flex;
+			align-items: center;
+			margin-left: 46.72rpx;
+			flex: 1;
+			text {
+				margin-left: 10rpx;
+				color: #A3A3A3;
+				font-size: 28.03rpx;
+			}
+			.dot {
+				height: 32.24rpx;
+				width: 32.24rpx;
+				border: 0.46rpx solid #ccc;
+				border-radius: 50%;
+			}
+			.active {
+				// background-color: #0076FF;
+				border: 0.46rpx solid #0076FF;
+				padding: 5rpx;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				.dot-content {
+					height: 100%;
+					width: 100%;
+					background-color: #0076FF;
+					border-radius: 50%;
+				}
+			}
+		}
+		.btn-right {
+			width: 429.9rpx;
+			height: 100%;
+			display: flex;
+			// background-color: #2C405A;
+			.item {
+				flex: 1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text {
+					color: #fff;
+					font-size: 30.37rpx;
+				}
+			}
+			.right1{
+				background-color: #0076FF;
+			}
+			.right2 {
+				background-color: #FF7100;
+			}
 		}
 	}
 }
