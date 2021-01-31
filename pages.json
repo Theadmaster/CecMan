@@ -46,10 +46,10 @@
         }
         ,{
             "path" : "pages/profile/profile",
-            "style" :                                                                                    
-            {
+            "style" : {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
             }
             
         }
@@ -66,6 +66,24 @@
         ,{
             "path" : "pages/detail/detail",
             "style" :{
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/setting/setting",
+            "style" : {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/edit/edit",
+            "style" : {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false,
 				"navigationStyle":"custom"
