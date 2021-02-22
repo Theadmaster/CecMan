@@ -110,6 +110,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/schedule/schedule",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的排班",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

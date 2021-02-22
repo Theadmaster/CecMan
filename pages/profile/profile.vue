@@ -92,6 +92,19 @@
 						<image src="../../static/img/handle.png" mode=""></image>
 						<text>报修处理</text>
 					</view>
+					<view class="item" @click="itemClick(5)">
+						<image src="../../static/img/paiban.png" mode=""></image>
+						<text>我的排班</text>
+					</view>
+					<view class="item">
+						
+					</view>
+					<view class="item">
+						
+					</view>
+					<view class="item">
+						
+					</view>
 				</view>
 			</view>
 		</view>
@@ -131,6 +144,10 @@
 					case 4:
 					console.log('报修处理')
 					break;
+					case 5:
+					uni.navigateTo({
+						url: '../schedule/schedule'
+					})
 				}
 			}
 		}
@@ -273,8 +290,12 @@
 			box-sizing: border-box;
 			padding: 10rpx 24.11rpx;
 			justify-content: space-around;
+			flex-wrap: wrap;
+			
 			.item {
 				height: 132.8rpx;
+				width: 150rpx;
+				margin-bottom: 25rpx;
 				justify-content: space-between;
 				display: flex;
 				flex-direction: column;
