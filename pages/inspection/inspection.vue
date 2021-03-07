@@ -95,6 +95,35 @@
 			</view>
 		</view>
 		
+		<u-popup 
+		v-model="show" 
+		mode="bottom" 
+		border-radius="40" 
+		mask>
+			<view class="pop">
+				<view class="pop-item" @click.stop="dotClick1(index)" v-for="(item, index) in actions" :key="index">
+					<text>{{item.name}}</text>
+					<view class="item-right1" >
+						<view class="dot" :class="item.checked? 'active' : ''" >
+							<view class="dot-content" />
+						</view>
+					</view>
+				</view>
+				<view class="line">
+					
+				</view>
+				<view class="pop-item1"  @click="show=false">
+					<text>取消</text>
+				</view>
+				<view class="line">
+					
+				</view>
+				<view class="pop-item1" @click="show=false">
+					<text style="color: #007AFF;">确定</text>
+				</view>
+			</view>
+		</u-popup>
+		
 	</view>
 </template>
 
@@ -112,6 +141,7 @@
 	export default {
 		data() {
 			return {
+				show: false,
 				topic: 'tyt', //要订阅的主题
 				isConnected: false,
 				publication: {
@@ -124,6 +154,23 @@
 				// 2 检查完毕
 				// 3 登记状态
 				status: 0,
+				actions: [
+					{
+						id: 0,
+						name: '潮湿',
+						checked: false
+					},
+					{
+						id: 1,
+						name: '破损',
+						checked: false
+					},
+					{
+						id: 2,
+						name: '信息不全',
+						checked: false
+					},
+				],
 				active: false,
 				interval: null,
 				count: 0,
@@ -279,12 +326,21 @@
 				this.list[i].checked = !this.list[i].checked
 				this.active = this.list.filter(item => !item.checked).length==0? true : false
 			},
+			dotClick1(i) {
+				this.actions.map(item => {
+					item.checked = false
+				})
+				this.actions[i].checked = !this.actions.checked
+				
+			},
 			operate(i) {
 				if(i===1) {
 					console.log('一键入库')
 					this.inStorage1 = this.inStorage
+					
 				}else {
 					console.log('问题产品登记')
+					this.show = true
 				}
 			},
 			itemClick(i) {
@@ -674,6 +730,58 @@
 	color: red !important;
 	text {
 		color: red;
+	}
+}
+
+.pop {
+	.line {
+		height: 20rpx;
+		background-color: #F7F7F7;
+	}
+	.pop-item1 {
+		height: 93.45rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text {
+			font-size: 33.64rpx;
+			color: #8B8B8B;
+		}
+	}
+	.pop-item {
+		height: 93.45rpx;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 40rpx;
+		text {
+			font-size: 33.64rpx;
+			color: #8B8B8B;
+		}
+		.item-right1 {
+			width: 40rpx;
+			// height: 100%;
+			.dot {
+				height: 32.24rpx;
+				width: 32.24rpx;
+				border: 0.46rpx solid #ccc;
+				border-radius: 50%;
+			}
+			.active {
+				// background-color: #0076FF;
+				border: 0.46rpx solid #0076FF;
+				padding: 5rpx;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				.dot-content {
+					height: 100%;
+					width: 100%;
+					background-color: #0076FF;
+					border-radius: 50%;
+				}
+			}
+		}
 	}
 }
 
