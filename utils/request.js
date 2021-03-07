@@ -1,5 +1,6 @@
 // request.js
-const BASE_URL = 'http://121.196.159.48'
+// const BASE_URL = 'http://121.196.159.48'
+const BASE_URL = 'http://127.0.0.1'
 export const myRequest = (options) => {
 	return new Promise((resolve, reject) => {
 		uni.showLoading({

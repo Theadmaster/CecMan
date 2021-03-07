@@ -12,7 +12,7 @@
 		<view class="data1">
 			<image src="../../static/img/medicine.png" mode=""></image>
 			<view class="info">
-				<text>100</text>
+				<text>{{progress}}</text>
 				<text class="dot">%</text>
 			</view>
 			<view class="desc">
@@ -22,15 +22,15 @@
 		
 		<view class="data">
 			<view class="data-item">
-				<text class="text1">000</text>
+				<text class="text1">{{inStorage1}}</text>
 				<text>已入库</text>
 			</view>
 			<view class="data-item center">
-				<text class="text1">000</text>
+				<text class="text1">{{qualified}}</text>
 				<text>合格</text>
 			</view>
 			<view class="data-item">
-				<text class="text1">000</text>
+				<text class="text1">{{unqualified}}</text>
 				<text>不合格</text>
 			</view>
 		</view>
@@ -99,9 +99,26 @@
 </template>
 
 <script>
+	import mqtt from 'mqtt'
+	var client
+	  const options = {
+		connectTimeout: 40000,
+		clientId: 'cecman-mqtt',
+		username: 'cecman',
+		password: '123456',
+		clean: true
+	  }
+	
 	export default {
 		data() {
 			return {
+				topic: 'tyt', //要订阅的主题
+				isConnected: false,
+				publication: {
+					topic: '/inspection',
+					qos: 0,
+					payload: '{ "msg": "Hello, I am browser." }',
+				},
 				// 0 未开始检查
 				// 1 正在检查
 				// 2 检查完毕
@@ -110,6 +127,7 @@
 				active: false,
 				interval: null,
 				count: 0,
+				inStorage1: '000',
 				// 0 未检查（等待检查）
 				// 1 检查通过 没毛病
 				// 2 检查不通过 潮湿
@@ -190,8 +208,52 @@
 				]
 			};
 		},
-		watch:{
-
+		computed: {
+			inStorage() {
+				let count = 0 
+				this.list.map(item => {
+					if(item.checked) {
+						count++
+					}
+				})
+				return '00' + count
+			},
+			progress() {
+				let count = 0
+				this.list.map(item => {
+					if(item.over) {
+						count++
+					}
+				})
+				return count/this.list.length*100
+			},
+			qualified() {
+				let count = 0
+				this.list.map(item => {
+					if(item.status==1) {
+						count++
+					}
+				})
+				return '00' + count
+			},
+			unqualified() {
+				let count = 0
+				this.list.map(item => {
+					if(item.status>1) {
+						count++
+					}
+				})
+				return '00' + count
+			}
+		},
+		onShow() {
+			// this.connect()
+			client = mqtt.connect('ws://j3cf667e.cn.emqx.cloud:8083/mqtt', options)
+			this.mqttMsg()
+		},
+		
+		onHide() {
+			this.destroyConnection()
 		},
 		methods: {
 			moreClick() {
@@ -220,6 +282,7 @@
 			operate(i) {
 				if(i===1) {
 					console.log('一键入库')
+					this.inStorage1 = this.inStorage
 				}else {
 					console.log('问题产品登记')
 				}
@@ -234,7 +297,13 @@
 					case 0:
 					//未开始检查状态
 					this.status = 1
-					
+					if(this.isConnected) {
+						console.log('success')
+						// client.publish('active', '1')
+						this.doPublish()
+					} else {
+						console.log('fail')
+					}
 					//模拟检测
 					this.interval = setInterval(() => {
 						if(this.interval) {
@@ -261,7 +330,52 @@
 					this.status = 3
 					break;
 				}
-			}
+			},
+			mqttMsg() {
+				client.on('connect', (e) => {
+				  console.log("连接成功！！！")
+				  client.subscribe('/inspection', { qos: 0 }, (error) => {
+					if (!error) {
+					  console.log('订阅成功')
+					  this.isConnected = true
+					} else {
+					  console.log('订阅失败')
+					  this. isConnected = false
+					}
+				  })
+				}).on('message', (topic, message) => {
+				  console.log('收到来自', topic, '的消息', message.toString())
+				  this.msg = message.toString()
+				}).on('end', () => {
+					console.log('断开连接')
+				}).on('reconnect', function(error) {
+					console.log('正在重连...', that.topic)
+				})
+			},
+			//发布消息
+			doPublish() {
+			  const { topic, qos, payload } = this.publication
+			  client.publish(topic, payload, qos, error => {
+			    if (error) {
+			      console.log('Publish error', error)
+			    }
+			  })
+			},
+			//断开ws
+			destroyConnection() {
+			  if (client.connected) {
+			    try {
+			      client.end()
+			      client = {
+			        connected: false,
+			      }
+			      console.log('Successfully disconnected!')
+			    } catch (error) {
+			      console.log('Disconnect failed', error.toString())
+			    }
+			  }
+			},
+			
 		}
 	}
 </script>
