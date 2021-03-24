@@ -230,23 +230,26 @@
 		box-shadow: 0 0 23.36rpx -7.47rpx rgba($color: #000000, $alpha: .2);
 		box-sizing: border-box;
 		padding-top: 70.09rpx;
-		padding-left: 65.42rpx;
-		padding-right: 30.72rpx;
+		// padding-left: 65.42rpx;
+		// padding-right: 30.72rpx;
 		.module-title {
 			font-size: 33.64rpx;
 			color: #101010;
 			text-align: center;
 			// margin-left: 9.34rpx;
+			margin: 0 auto;
 			margin-bottom: 16.35rpx;
 		}
 		.module-desc {
+			display: flex;
+			justify-content: center;
 			color: #919191;
 			font-size: 22.42rpx;
 			text-align: right;
 			margin-bottom: 40.18rpx;
 		}
 		.module-img {
-			text-align: right;
+			text-align: center;
 			image {
 				height: 139.71rpx;
 				width: 139.71rpx;

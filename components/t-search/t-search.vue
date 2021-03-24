@@ -32,7 +32,7 @@
 
 <style lang="scss">
 .search-wrap {
-	max-width: 680.63rpx;
+	// max-width: 680.63rpx;
 	margin: 26.72rpx auto;
 	height: 70.09rpx;
 	border-radius: 46.72rpx;
