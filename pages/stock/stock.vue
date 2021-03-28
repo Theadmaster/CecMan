@@ -258,9 +258,9 @@
 
 .content {
 	box-sizing: border-box;
-	padding: 0 23.47rpx;
+	padding: 0 43.47rpx;
 	.search-wrap {
-		max-width: 680.63rpx;
+		// max-width: 680.63rpx;
 		margin: 26.72rpx auto;
 		height: 70.09rpx;
 		border-radius: 16.72rpx;

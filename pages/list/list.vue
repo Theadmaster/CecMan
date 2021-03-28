@@ -9,7 +9,7 @@
 			</view>
 		</u-navbar>
 		
-		<view class="search-wrap">
+		<view class="search-wrap"  >
 			<t-search background="#fff" @scan="scanClick" />
 		</view>
 		
@@ -291,6 +291,7 @@
 	.search-wrap {
 		height: 107.47rpx;
 		background-color: #fff;
+		padding: 0 46.72rpx;
 	}
 	.select-active {
 		background-color: #F7F7F7 !important;

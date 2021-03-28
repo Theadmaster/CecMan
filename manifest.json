@@ -47,7 +47,7 @@
                 "ad" : {}
             },
             "splashscreen" : {
-                "androidStyle" : "default",
+                "androidStyle" : "common",
                 "android" : {
                     "hdpi" : "C:/Users/asus1/Desktop/DK6a2_e6a9ae6b8ffc0dcbb0ccdf2d52a03635.png"
                 }
