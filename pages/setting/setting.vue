@@ -2,14 +2,16 @@
 	<view class="wrapper">
 		<view class="status_bar" />
 		
-		<u-navbar  title="设置" />
+		<u-navbar height="60"  title="设置" />
 		
 		<view class="content">
 			<view class="wrap">
-				<view class="item" :class="index===0? 'first': ''" v-for="(item, index) in list" :key="index" @click="itemClick(index)">
-					<text>{{item.name}}</text>
-					<u-icon name="arrow-right"></u-icon>
-				</view>
+				
+					<view class="item" :class="index===0? 'first': ''" v-for="(item, index) in list" :key="index" @click="itemClick(index)">
+						<text>{{item.name}}</text>
+						<u-icon name="arrow-right"></u-icon>
+					</view>
+				
 			</view>
 			<view class="item1">
 				<text>切换账号</text>
@@ -63,9 +65,11 @@
 		}
 		.wrap {
 			box-sizing: border-box;
-			padding: 0 46.72rpx;
+
 			.item {
 				box-shadow: 0 1rpx 13.36rpx -7.47rpx rgba($color: #000000, $alpha: .2);
+				// border-bottom: 0.46rpx solid #eee;
+				padding: 0 46.72rpx;
 				height: 93.45rpx;
 				
 				display: flex;
@@ -76,6 +80,7 @@
 					color: #8B8B8B;
 				}
 			}
+			
 		}
 		
 		.item1 {

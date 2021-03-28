@@ -1,7 +1,7 @@
 <template>
 	<view class="wrapper">
 		<view class="status_bar" />
-		<u-navbar title="入库情况">
+		<u-navbar height="60" title="入库情况">
 			<view class="right" slot="right"@click="moreClick" >
 				<text>筛选</text>
 				<u-icon name="arrow-down-fill" size="10"></u-icon>

@@ -2,7 +2,7 @@
 	<view class="wrapper">
 		<view class="status_bar" />
 		
-		<u-navbar  title="我的资料" />
+		<u-navbar height="60"  title="我的资料" />
 		
 		<view class="content">
 			<view class="wrap">

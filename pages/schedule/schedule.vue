@@ -406,17 +406,17 @@
 					},
 				],
 				taskInfo: [{
-					route: '耗材1检测入库',
-					startTime: '22: 00: 00',
+					route: '耗材21进行巡检',
+					startTime: '13: 00: 00',
 				}, {
-					route: '耗材2检测入库',
-					startTime: '24: 00: 00',
+					route: '耗材22进行巡检',
+					startTime: '13: 00: 00',
 				}, {
-					route: '耗材3检测入库',
-					startTime: '24: 00: 00',
+					route: '耗材23进行巡检',
+					startTime: '13: 00: 00',
 				}, {
-					route: '耗材4检测入库',
-					startTime: '24: 00: 00',
+					route: '耗材24进行巡检',
+					startTime: '13: 00: 00',
 				}, ],
 				selectDate: {
 					date: '7月14日',

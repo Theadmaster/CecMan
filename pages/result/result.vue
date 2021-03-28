@@ -2,7 +2,7 @@
 	<view class="wrapper">
 		<view class="status_bar" />
 		
-		<u-navbar title="扫描结果">
+		<u-navbar height="60" title="扫描结果">
 			<view class="right" slot="right"@click="moreClick" >
 				<image src="../../static/img/menu.png" mode=""></image>
 			</view>

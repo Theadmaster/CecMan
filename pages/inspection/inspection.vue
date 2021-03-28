@@ -3,8 +3,8 @@
 		
 		<view class="status_bar" />
 		
-		<u-navbar title="随货同行单">
-			<view class="right" slot="right"@click="moreClick" >
+		<u-navbar height="60" title="随货同行单">
+			<view class="right"  slot="right"@click="moreClick" >
 				<image src="../../static/img/menu.png" mode=""></image>
 			</view>
 		</u-navbar>
@@ -40,17 +40,22 @@
 				<view class="item" v-for="(item, index) in list" :key="index" @click="itemClick(index)">
 					<view class="item-left" >
 						<view class="name" >
-							<text :class="item.status>1&&item.over? 'err': ''">{{item.name}}</text>
-							<view class="tag" v-if="item.status>1 && item.over">
-								<text>{{item.status==2? '潮湿': (item.status == 3? '破损' : (item.status == 4? '信息不全' : ''))}}</text>
+							<text :class="item.status>2&&item.over? 'err': ''">{{item.name}}</text>
+							<view class="tag" v-if="item.status>2 && item.over">
+								<text>{{item.status==3? '潮湿': (item.status == 4? '破损' : (item.status == 5? '信息不全' : ''))}}</text>
 							</view>
 						</view>
-						<text :class="item.status>1&&item.over? 'err': ''">产品批号：{{item.num}}</text>
+						<text :class="item.status>2&&item.over? 'err': ''">产品批号：{{item.num}}</text>
 					</view>
 					<view class="item-right" v-if="status!=3" >
-						<image v-if="item.status==1" src="../../static/img/fa-check.svg" mode=""></image>
+						<!-- 检查通过 2 -->
+						<image v-if="item.status==2" src="../../static/img/fa-check.svg" mode=""></image>
+						<!-- 正在检查 1 -->
+						<u-loading color="#2b85e4" v-if="item.status==1" mode="circle"></u-loading>
+						<!-- 未检查 0 -->
 						<image v-if="item.status==0" src="../../static/img/fa-history.svg" mode=""></image>
-						<image v-if="item.status>1" src="../../static/img/fa-times.svg" mode=""></image>
+						<!-- 检查不通过 3 4 5 -->
+						<image v-if="item.status>2" src="../../static/img/fa-times.svg" mode=""></image>
 					</view>
 					
 					<view class="item-right1" v-else>
@@ -176,10 +181,11 @@
 				count: 0,
 				inStorage1: '000',
 				// 0 未检查（等待检查）
-				// 1 检查通过 没毛病
-				// 2 检查不通过 潮湿
-				// 3 检查不通过 破损
-				// 4 检查不通过 信息不全
+				// 1 正在检查
+				// 2 检查通过 没毛病
+				// 3 检查不通过 潮湿
+				// 4 检查不通过 破损
+				// 5 检查不通过 信息不全
 				list: [
 					{
 						id: 0,
@@ -277,7 +283,7 @@
 			qualified() {
 				let count = 0
 				this.list.map(item => {
-					if(item.status==1) {
+					if(item.status==2) {
 						count++
 					}
 				})
@@ -286,7 +292,7 @@
 			unqualified() {
 				let count = 0
 				this.list.map(item => {
-					if(item.status>1) {
+					if(item.status>2) {
 						count++
 					}
 				})
@@ -295,8 +301,9 @@
 		},
 		onShow() {
 			// this.connect()
-			client = mqtt.connect('ws://j3cf667e.cn.emqx.cloud:8083/mqtt', options)
-			this.mqttMsg()
+			
+			// client = mqtt.connect('ws://j3cf667e.cn.emqx.cloud:8083/mqtt', options)
+			// this.mqttMsg()
 		},
 		
 		onHide() {
@@ -362,6 +369,7 @@
 					}
 					//模拟检测
 					this.interval = setInterval(() => {
+						
 						if(this.interval) {
 							if(this.count>this.list.length-1) {
 								clearInterval()
@@ -369,7 +377,10 @@
 								this.status = 2
 							}
 							this.list[this.count].over = true
-							this.list[this.count].status = (Math.floor(Math.random()*3)+1).toString()
+							this.list[this.count].status = (Math.floor(Math.random()*4)+2).toString()
+							if(this.count<this.list.length-1) {
+								this.list[this.count+1].status = 1
+							}
 							this.count++
 						}
 					}, 1000)
@@ -384,6 +395,7 @@
 					case 2: 
 					//检查完毕状态
 					this.status = 3
+					console.log(this.list)
 					break;
 				}
 			},
@@ -540,8 +552,9 @@
 	top: -126.72rpx;
 	box-sizing: border-box;
 	padding: 42.05rpx 46.26rpx;
+	// padding-bottom: ;
 	.item-wrap {
-		height: 623.36rpx;
+		height: 463.36rpx;
 		overflow: scroll;
 		.item {
 			height: 93.45rpx;

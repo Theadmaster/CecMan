@@ -127,6 +127,7 @@
 		"backgroundColor": "#F8F8F8"
 	},
 	"tabBar": {
+		"height":"60",
 		"color": "#000",
 		"selectedColor": "#1196DB",
 		"backgroundColor": "#fff",

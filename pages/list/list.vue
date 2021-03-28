@@ -3,7 +3,7 @@
 		
 		<view class="status_bar" />
 		
-		<u-navbar title="随货同行单">
+		<u-navbar height="60" title="随货同行单">
 			<view class="right" slot="right" @click="photoClick">
 				<image src="../../static/img/camera.png" mode=""></image>
 			</view>

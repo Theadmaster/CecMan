@@ -2,7 +2,7 @@
 	<view class="wrapper">
 		<view class="status_bar" />
 		
-		<u-navbar :border-bottom="false" :is-back="false" title="" :background="{background: '#F7F7F7'}">
+		<u-navbar height="60" :border-bottom="false" :is-back="false" title="" :background="{background: '#F7F7F7'}">
 			<view class="right" slot="right"@click="moreClick" >
 				<image src="../../static/img/setting.png" mode=""></image>
 			</view>

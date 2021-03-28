@@ -2,7 +2,7 @@
 	<view class="wrapper">
 		<view class="status_bar" />
 		
-		<u-navbar title="">
+		<u-navbar height="60" title="">
 			<view class="titles"  v-for="(item, i) in titles" :key="i" @click="currentIndex = i">
 				<text :class="currentIndex===i? 'title-active' : ''">{{item}}</text>
 			</view>
