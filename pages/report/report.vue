@@ -65,24 +65,33 @@
 					<view class="item1" style="border: none;">
 						
 					</view>
+					<view class="item1" style="border: none;">
+						
+					</view>
+					<view class="item1" style="border: none;">
+						
+					</view>
+					<view class="item1" style="border: none;">
+						
+					</view>
 				</view>
 			</view>
 			
 			<view v-if="currentIndex===0">
-				<view class="content-item">
+				<view class="content-item chart-one">
 					<view class="qiun-charts" >
 						<canvas canvas-id="canvasPie" id="canvasPie" class="charts" @touchstart="touchPie"></canvas>
 					</view>
 					
 				</view>
 				
-				<view class="content-item">
+				<view class="content-item chart-one">
 					<view class="qiun-charts" >
 						<canvas canvas-id="canvasPie1" id="canvasPie1" class="charts" @touchstart="touchPie1"></canvas>
 					</view>
 				</view>
 				
-				<view class="content-item">
+				<view class="content-item chart-one">
 					<view class="qiun-charts" >
 						<canvas canvas-id="canvasLineA" id="canvasLineA" class="charts" @touchstart="touchLineA"></canvas>
 					</view>
@@ -93,7 +102,7 @@
 				<view class="title" >
 					<text>医用耗材分析报告</text>
 				</view>
-				<view class="content-item">
+				<view class="content-item chart-one">
 					<view class="qiun-charts1" >
 						<canvas canvas-id="canvasRing" id="canvasRing" class="charts1" @touchstart="touchRing"></canvas>
 					</view>
@@ -102,7 +111,7 @@
 				<view class="title" >
 					<text>供应商合格率分析报告</text>
 				</view>
-				<view class="content-item">
+				<view class="content-item chart-one">
 					<view class="qiun-charts" >
 						<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" @touchstart="touchColumn"></canvas>
 					</view>
@@ -186,8 +195,8 @@
 		},
 		onLoad() {
 			_self = this;
-			this.cWidth=uni.upx2px(680);
-			this.cHeight=uni.upx2px(600);
+			this.cWidth=uni.upx2px(1000);
+			this.cHeight=uni.upx2px(800);
 			this.getServerData();
 		},
 		methods: {
@@ -349,8 +358,8 @@
 						backgroundColor: '#ff0000',
 						pie: {
 						  offsetAngle: -35,
-						  ringWidth: 40*_self.pixelRatio,
-						  labelWidth:10,
+						  ringWidth: 60*_self.pixelRatio,
+						  labelWidth:20,
 						  border: true
 						},
 						
@@ -359,8 +368,8 @@
 					pixelRatio:_self.pixelRatio,
 					series: chartData.series,
 					animation: true,
-					width: uni.upx2px(740)*_self.pixelRatio,
-					height: uni.upx2px(500)*_self.pixelRatio,
+					width: uni.upx2px(1000)*_self.pixelRatio,
+					height: uni.upx2px(1000)*_self.pixelRatio,
 					disablePieStroke: false,
 					dataLabel: false,
 				});
@@ -453,10 +462,10 @@
 
 <style lang="scss">
 	
-	.qiun-charts{width: 750upx; height:600upx;background-color: #FFFFFF;}
-	.charts{width: 750upx; height:600upx;background-color: #FFFFFF;}
-	.qiun-charts1{width: 750upx; height:500upx;background-color: #FFFFFF;}
-	.charts1{width: 750upx; height:500upx;background-color: #fff;}
+	.qiun-charts{width: 1050upx; height:900upx;background-color: #FFFFFF;}
+	.charts{width: 1000upx; height:900upx;background-color: #FFFFFF;}
+	.qiun-charts1{width: 1050upx; height:900upx;background-color: #FFFFFF;}
+	.charts1{width: 1000upx; height:900upx;background-color: #fff;}
 	
 	
 .titles {
@@ -496,7 +505,13 @@
 .content {
 	background-color: #fff;
 	padding: 22rpx 45.53rpx;
+	.chart-one {
+		// background-color: #007AFF;
+		display: flex;
+		justify-content: center;
+	}
 	.content-item {
+		
 		.title {
 			margin-bottom: 22.53rpx;
 			color: #101010;
@@ -509,7 +524,7 @@
 			
 			.item {
 				height: 160.09rpx;
-				width: 300.46rpx;
+				width: 440.46rpx;
 				border: 0.46rpx solid rgba(187, 187, 187, 100);
 				border-radius: 9.38rpx;
 				margin-bottom: 29.57rpx;
@@ -535,7 +550,7 @@
 			}
 			.item1 {
 				height: 127.04rpx;
-				width: 208.45rpx;
+				width: 308.45rpx;
 				border: 0.46rpx solid rgba(187, 187, 187, 100);
 				border-radius: 9.38rpx;
 				margin-bottom: 17.57rpx;

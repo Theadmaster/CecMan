@@ -12,7 +12,7 @@
 		<view class="data1">
 			<image src="../../static/img/medicine.png" mode=""></image>
 			<view class="info">
-				<text>{{progress}}</text>
+				<text>{{progress? progress : 0}}</text>
 				<text class="dot">%</text>
 			</view>
 			<view class="desc">
@@ -37,7 +37,13 @@
 		
 		<view class="list">
 			<view class="item-wrap">
-				<view class="item" v-for="(item, index) in list" :key="index" @click="itemClick(index)">
+				<view class="placeholder-item" v-if="list.length==0">
+					<image src="../../static/img/none.png" mode="aspectFit"></image>
+					<view class="placeholder-text">
+						<text style="color: #ccc;">暂无待检测产品</text>
+					</view>
+				</view>
+				<view v-if="list" class="item" v-for="(item, index) in list" :key="index" @click="itemClick(index)">
 					<view class="item-left" >
 						<view class="name" >
 							<text :class="item.status>2&&item.over? 'err': ''">{{item.name}}</text>
@@ -70,14 +76,14 @@
 				<text>{{count}}/{{list.length}}</text>
 			</view>
 			
-			<view class="btn" v-if="status===1" @click="btnClick(1)">
+			<view class="btn" v-if="status===1&&list.length>0" @click="btnClick(1)">
 				<text>停止</text>
 			</view>
-			<view class="btn btn1" v-if="status===0" @click="btnClick(0)">
+			<view class="btn btn1" v-if="status===0&&list.length>0" @click="btnClick(0)">
 				<text>开始</text>
 			</view>
 			
-			<view class="btn btn2" v-if="status===2" @click="btnClick(2)">
+			<view class="btn btn2" v-if="status===2&&list.length>0" @click="btnClick(2)">
 				<text>查看检测结果</text>
 			</view>
 			
@@ -556,6 +562,26 @@
 	.item-wrap {
 		height: 463.36rpx;
 		overflow: scroll;
+		.placeholder-item {
+			display: flex;
+			flex-direction: column;
+			// justify-content: center;
+			align-items: center;
+			// height: 100%;
+			// width: 100%;
+			image {
+				height: 400rpx;
+				width: 400rpx;
+				// border: 0.69rpx solid #000;
+			}
+			.placeholder-text {
+				display: flex;
+				align-items: flex-start;
+				justify-content: center;
+				font-size: 33.88rpx;
+				// color: $uni-font-size-base;
+			}
+		}
 		.item {
 			height: 93.45rpx;
 			display: flex;
