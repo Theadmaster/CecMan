@@ -185,6 +185,8 @@
 				active: false,
 				interval: null,
 				count: 0,
+				
+				
 				inStorage1: '000',
 				// 0 未检查（等待检查）
 				// 1 正在检查
@@ -195,75 +197,76 @@
 				list: [
 					{
 						id: 0,
-						name: '结扎装置',
-						num: '10023043',
+						name: '胃苏颗粒',
+						num: '20190909',
 						status: '0',
 						over: false,
 						checked: false
 					}, {
 						id: 1,
-						name: '结扎装置',
-						num: '10023043',
+						name: '红霉素肠溶胶囊',
+						num: '20198283',
 						status: '0',
 						over: false,
 						checked: false
 					}, {
 						id: 2,
-						name: '结扎装置',
-						num: '10023043',
+						name: '粒钻牌铁皮枫斗含片',
+						num: '20181204',
 						status: '0',
 						over: false,
 						checked: false
 					}, {
 						id: 3,
-						name: '结扎装置',
-						num: '10023043',
+						name: '复方氨酚烷胺胶囊',
+						num: '20180402',
 						status: '0',
 						over: false,
-						checked: false
-					}, {
-						id: 4,
-						name: '结扎装置',
-						num: '10023043',
-						status: '0',
-						over: false,
-						checked: false
-					}, {
-						id: 5,
-						name: '结扎装置',
-						num: '10023043',
-						status: '0',
-						over: false,
-						checked: false
-					}, {
-						id: 6,
-						name: '结扎装置',
-						num: '10023043',
-						status: '0',
-						over: false,
-						checked: false
-					}, {
-						id: 7,
-						name: '结扎装置',
-						num: '10023043',
-						status: '0',
-						over: false,
-						checked: false
-					}, {
-						id: 8,
-						name: '结扎装置',
-						num: '10023043',
-						status: '0',
-						over: false,
-						checked: false
-					}, {
-						id: 9,
-						name: '结扎装置',
-						num: '10023043',
-						status: '0',
-						over: false,
-						checked: false
+						checked: false,
 					}
+					// }, {
+					// 	id: 4,
+					// 	name: '结扎装置',
+					// 	num: '10023043',
+					// 	status: '0',
+					// 	over: false,
+					// 	checked: false
+					// }, {
+					// 	id: 5,
+					// 	name: '结扎装置',
+					// 	num: '10023043',
+					// 	status: '0',
+					// 	over: false,
+					// 	checked: false
+					// }, {
+					// 	id: 6,
+					// 	name: '结扎装置',
+					// 	num: '10023043',
+					// 	status: '0',
+					// 	over: false,
+					// 	checked: false
+					// }, {
+					// 	id: 7,
+					// 	name: '结扎装置',
+					// 	num: '10023043',
+					// 	status: '0',
+					// 	over: false,
+					// 	checked: false
+					// }, {
+					// 	id: 8,
+					// 	name: '结扎装置',
+					// 	num: '10023043',
+					// 	status: '0',
+					// 	over: false,
+					// 	checked: false
+					// }, {
+					// 	id: 9,
+					// 	name: '结扎装置',
+					// 	num: '10023043',
+					// 	status: '0',
+					// 	over: false,
+					// 	checked: false
+					// }
 				]
 			};
 		},
@@ -383,7 +386,24 @@
 								this.status = 2
 							}
 							this.list[this.count].over = true
-							this.list[this.count].status = (Math.floor(Math.random()*4)+2).toString()
+							
+							//视频需要
+							switch(this.count) {
+								case 0:
+								case 1:
+								this.list[this.count].status = 2
+								
+								break;
+								case 2: 
+								this.list[this.count].status = 3
+								break;
+								case 3:
+								this.list[this.count].status = 4
+								break;
+							}
+							
+							
+							// this.list[this.count].status = (Math.floor(Math.random()*4)+2).toString()
 							if(this.count<this.list.length-1) {
 								this.list[this.count+1].status = 1
 							}
@@ -590,7 +610,7 @@
 			border-bottom: 0.46rpx solid #eee;
 			
 			.item-left {
-				width: 336.91rpx;
+				width: 406.91rpx;
 				height: 74.11rpx;
 				display: flex;
 				flex-direction: column;

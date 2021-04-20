@@ -76,28 +76,28 @@
 						list: [
 							{
 								id: 0,
-								name: '常州乐奥医疗科技有限公司',
-								time: '05:00',
+								name: '河北新元素医疗器械科技有限公司',
+								time: '16:23',
 								checked: false
 							}, 
-							{
-								id: 1,
-								name: '常州乐奥医疗科技有限公司',
-								time: '05:00',
-								checked: false
-							},
-							{
-								id: 2,
-								name: '常州乐奥医疗科技有限公司',
-								time: '05:00',
-								checked: false
-							},
-							{
-								id: 3,
-								name: '常州乐奥医疗科技有限公司',
-								time: '05:00',
-								checked: false
-							}
+							// {
+							// 	id: 1,
+							// 	name: '常州乐奥医疗科技有限公司',
+							// 	time: '05:00',
+							// 	checked: false
+							// },
+							// {
+							// 	id: 2,
+							// 	name: '常州乐奥医疗科技有限公司',
+							// 	time: '05:00',
+							// 	checked: false
+							// },
+							// {
+							// 	id: 3,
+							// 	name: '常州乐奥医疗科技有限公司',
+							// 	time: '05:00',
+							// 	checked: false
+							// }
 						]
 					},
 					{
@@ -194,6 +194,10 @@
 				    sourceType: ['album', 'camera'], //从相册选择
 				    success: function (res) {
 				        console.log(JSON.stringify(res.tempFilePaths));
+						
+						uni.navigateTo({
+							url: '../result/result'
+						})
 				    },
 					fail: err => {
 						console.log(err)
@@ -210,6 +214,9 @@
 			// 检测按钮
 			inspectClick(){
 				console.log('检测')
+				uni.navigateTo({
+					url: '../inspection/inspection'
+				})
 			},
 			//单项供应商操作
 			sheetClick(i) {

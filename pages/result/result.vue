@@ -11,11 +11,11 @@
 		<view class="info">
 			<view class="info-item">
 				<text style="font-weight: bold;">供应商：</text>
-				<text>常州乐奥医疗科技有限公司</text>
+				<text>河北新元素医疗器械科技有限公司</text>
 			</view>
 			<view class="info-item">
 				<text style="font-weight: bold;">日  期：</text>
-				<text>2020年-10-20</text>
+				<text>2019-8-19</text>
 			</view>
 		</view>
 		
@@ -105,64 +105,44 @@
 				list: [
 					{
 						id: 0,
-						name: '结扎装置',
-						batchNum: '',
-						model: '',
-						registrationNo: '',
-						count: '',
-						manufactureDate: '',
-						expirationDate: ''
+						name: '九天昂克服溶液',
+						batchNum: '20190909',
+						model: '12支',
+						registrationNo: '267237167261',
+						count: '1盒',
+						manufactureDate: '2018-10-17',
+						expirationDate: '2019-10-17'
 					},
 					{
 						id: 1,
-						name: '结扎装置',
-						batchNum: '',
-						model: '',
-						registrationNo: '',
-						count: '',
-						manufactureDate: '',
-						expirationDate: ''
+						name: '黄连素',
+						batchNum: '20198283',
+						model: '50粒',
+						registrationNo: '532651728923',
+						count: '1盒',
+						manufactureDate: '2018-04-14',
+						expirationDate: '2019-04-14'
 					},
 					{
 						id: 2,
-						name: '结扎装置',
-						batchNum: '',
-						model: '',
-						registrationNo: '',
-						count: '',
-						manufactureDate: '',
-						expirationDate: ''
+						name: '珍珠明日滴眼液',
+						batchNum: '20181204',
+						model: '10ml',
+						registrationNo: '233020414',
+						count: '1盒',
+						manufactureDate: '2019-11-14',
+						expirationDate: '2020-11-21'
 					},
-					{
-						id: 3,
-						name: '结扎装置',
-						batchNum: '',
-						model: '',
-						registrationNo: '',
-						count: '',
-						manufactureDate: '',
-						expirationDate: ''
-					},
-					{
-						id: 4,
-						name: '结扎装置',
-						batchNum: '',
-						model: '',
-						registrationNo: '',
-						count: '',
-						manufactureDate: '',
-						expirationDate: ''
-					},
-					{
-						id: 5,
-						name: '结扎装置',
-						batchNum: '',
-						model: '',
-						registrationNo: '',
-						count: '',
-						manufactureDate: '',
-						expirationDate: ''
-					}
+					// {
+					// 	id: 3,
+					// 	name: '红霉素肠溶胶囊',
+					// 	batchNum: '20180402',
+					// 	model: '20粒',
+					// 	registrationNo: '233020414',
+					// 	count: '1盒',
+					// 	manufactureDate: '2019-11-14',
+					// 	expirationDate: '2020-11-21'
+					// },
 				]
 			};
 		},
@@ -197,6 +177,9 @@
 			},
 			saveClick() {
 				console.log('保存')
+				uni.navigateTo({
+					url: '../list/list'
+				})
 			}
 		}
 	}
@@ -268,7 +251,7 @@
 				}
 				.nape-right {
 					.input {
-						width: 186.91rpx;
+						width: 250.91rpx;
 						text-align: center;
 						// height: 37.38rpx;
 						/deep/ .uni-input-input {
